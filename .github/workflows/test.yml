@@ -16,3 +16,7 @@ jobs:
           python -m pip install --upgrade pip
           # Install additional dependencies if needed
           pip install -r requirments.txt
+          robot --version
+      - name: Run Robot Framework tests
+        run: |
+          robot --outputdir results tests/
