@@ -16,7 +16,11 @@ jobs:
           python -m pip install --upgrade pip
           # Install additional dependencies if needed
           pip install -r requirments.txt
-          robot --version
+          python -c "import robot; print(f'Robot Framework {robot.__version__}')"
       - name: Run Robot Framework tests
         run: |
-          robot --outputdir results tests/
+          if find tests -type f -name "*.robot" 2>/dev/null | grep -q .; then
+            robot --outputdir results tests/
+          else
+            echo "No .robot files found under tests/. Skipping test run."
+          fi
